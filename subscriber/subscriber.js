@@ -14,7 +14,7 @@ if ( typeof keyfile === 'undefined' ) {
 }
 
 const pubsub = new PubSub({
-  projectID: project_id,
+  projectId: project_id,
   keyFilename: keyfile
 });
 
