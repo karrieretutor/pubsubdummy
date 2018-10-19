@@ -1,0 +1,26 @@
+{
+  "name": "subscriber",
+  "version": "0.0.1",
+  "description": "gcp subscriber demo",
+  "main": "subscriber.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karrieretutor/pubsubdummy.git"
+  },
+  "keywords": [
+    "gcp",
+    "pubsub"
+  ],
+  "author": "kevin.seidel@karrieretutor.de",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karrieretutor/pubsubdummy/issues"
+  },
+  "homepage": "https://github.com/karrieretutor/pubsubdummy#readme",
+  "dependencies": {
+    "@google-cloud/pubsub": "^0.20.1"
+  }
+}
