@@ -39,21 +39,26 @@ var messageWorker = function ( message ) {
   //remove message from backglog
   let i = messageBacklog.indexOf( message );
   messageBacklog.splice( i, 1 );
+
+  //msg removed from backlog, its safe to resubscribe to the event
+  if ( !subscription.listeners("message").includes( onMessage ) ) {
+    subscription.on( "message", onMessage );
+  }
 }
 
 var onMessage = function ( message ) {
-  //if backlog is full, return
-  if ( messageBacklog.length >= maxBacklog ) {
-    console.log( "cannot work on message " + message.id + ", backlog full");
-    return;
-  }
-  
   //first ack message to avoid multiple instances working on it
   message.ack();
   messageBacklog.push( message );
 
   //the delay is just for simulating the worker to actually take some time
   setTimeout( messageWorker, 5000, message );
+
+  //if backlog is full, stop listening to event
+  if ( messageBacklog.length >= maxBacklog ) {
+    console.log( "message backlog full, will stop working on message queue, until there is space in the message backlog");
+    subscription.removeListener( "message", onMessage );
+  }
 }
 
 subscription.on( "message", onMessage );
