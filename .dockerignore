@@ -1,0 +1,2 @@
+#dont copy node modules
+**/node_modules/
