@@ -18,11 +18,11 @@ const pubsub = new PubSub({
   keyFilename: keyfile
 });
 
-console.log(pubsub);
-
 pubsub.getSubscriptions( (err, subscriptions) => {
   if (!err)  {
-    console.log(subscriptions);
+    subscriptions.forEach ( (subscription) => {
+      console.log(subscription.name);
+    });
   }
   else {
     console.log(err);
