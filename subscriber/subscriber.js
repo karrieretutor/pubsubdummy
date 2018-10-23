@@ -1,5 +1,14 @@
 const PubSub = require('@google-cloud/pubsub');
 
+//add debug output in case of warning
+process.on('warning', e => console.warn(e.stack));
+
+//listen to sigint
+process.on('SIGINT', () => {
+  console.log("registered SIGINT, shutting down");
+  process.exit(1);
+});
+
 var project_id        = process.env.PROJECT_ID;
 var keyfile           = process.env.KEYFILE || "/etc/keyfile.json";
 var subscriptionname  = process.env.SUBSCRIPTION;
