@@ -1,5 +1,8 @@
 FROM node:alpine
 
+RUN apk update && \
+    apk upgrade
+
 COPY --chown=node:node ./subscriber /opt/subscriber/
 WORKDIR /opt/subscriber
 RUN npm install
