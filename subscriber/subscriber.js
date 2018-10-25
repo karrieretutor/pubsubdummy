@@ -56,13 +56,6 @@ var messageWorker = function ( message ) {
 }
 
 var onMessage = function ( message ) {
-  //first ack message to avoid multiple instances working on it
-  message.ack();
-  messageBacklog.push( message );
-
-  //the delay is just for simulating the worker to actually take some time
-  setTimeout( messageWorker, 5000, message );
-
   //if backlog is full, stop listening to event
   if ( messageBacklog.length >= maxBacklog ) {
     console.log( "message backlog full, will stop working on message queue, until there is space in the message backlog");
@@ -71,6 +64,13 @@ var onMessage = function ( message ) {
 
     //instead properly reject message
     message.nack();
+  }
+  else {
+    message.ack();
+    messageBacklog.push( message );
+
+    //the delay is just for simulating the worker to actually take some time
+    setTimeout( messageWorker, 5000, message );
   }
 }
 
