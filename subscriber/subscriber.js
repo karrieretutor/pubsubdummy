@@ -66,7 +66,11 @@ var onMessage = function ( message ) {
   //if backlog is full, stop listening to event
   if ( messageBacklog.length >= maxBacklog ) {
     console.log( "message backlog full, will stop working on message queue, until there is space in the message backlog");
-    subscription.removeListener( "message", onMessage );
+    
+    //subscription.removeListener( "message", onMessage );
+
+    //instead properly reject message
+    message.nack();
   }
 }
 
